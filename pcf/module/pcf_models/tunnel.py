@@ -22,7 +22,7 @@ import module.pcf_models.tunnel_virtual_ab_com as tunnel_virtual_ab_com
 #### Authorship information
 ####
 __author__ = "Chuan Jiang"
-__copyright__ = "Copyright 2019, Purdue ISL Robustness Framerwork Project"
+__copyright__ = "Copyright 2020, Purdue ISL PCF Project"
 __credits__ = ["Chuan Jiang"]
 __license__ = "GPL"
 __version__ = "0.0.1"

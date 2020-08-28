@@ -28,14 +28,14 @@ import module.max_min_u.max_min_u as max_min_u
 ####
 #### Authorship information
 ####
-__author__ = "Yiyang Chang, Chuan Jiang"
-__copyright__ = "Copyright 2016, Purdue ISL Robustness Framerwork Project"
-__credits__ = ["Yiyang Chang, Chuan Jiang"]
+__author__ = "Chuan Jiang"
+__copyright__ = "Copyright 2020, Purdue ISL PCF Project"
+__credits__ = ["Chuan Jiang"]
 __license__ = "GPL"
 __version__ = "0.0.1"
-__maintainer__ = "Yiyang Chang"
-__email__ = "chang256@purdue.edu"
-__status__ = "alpha"
+__maintainer__ = "Chuan Jiang"
+__email__ = "jiang486@purdue.edu"
+__status__ = "beta"
 
 def _parse_args():
   parser = argparse.ArgumentParser()
