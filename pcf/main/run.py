@@ -80,7 +80,7 @@ def _compute(main_config, topo_config):
   if solver is None:   
     logger.error('WRONG scheme!')
     return
-  mlu, solving_time = solver.compute_max_throughput(num_link_failure=1)
+  mlu, solving_time = solver.compute_max_throughput(num_link_failure=int(topo_config['attributes']['num_link_failures']))
   logger.info('MLU: %s, solving time: %s seconds' % (mlu, solving_time))
   logger.info('Tunnel reservation is saved in %s' % main_config['output'])
 

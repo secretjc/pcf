@@ -11974,3 +11974,63 @@ Iteration    Objective       Primal Inf.    Dual Inf.      Time
 
 Solved in 2063 iterations and 0.07 seconds
 Optimal objective  1.201703234e+00
+
+Gurobi 8.0.1 (linux64, Python) logging started Fri Aug 28 08:57:08 2020
+
+Changed value of parameter method to 2
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Optimize a model with 6993 rows, 17772 columns and 34286 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e-04, 2e-01]
+Presolve removed 5394 rows and 15245 columns
+Presolve time: 0.02s
+Presolved: 1599 rows, 2527 columns, 8569 nonzeros
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 7.305e+03
+ Factor NZ  : 2.338e+04 (roughly 1 MByte of memory)
+ Factor Ops : 6.722e+05 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   1.02590692e-01  0.00000000e+00  5.10e+00 0.00e+00  9.94e-03     0s
+   1   1.86899261e-01  1.31023339e-01  2.10e+00 2.07e-02  4.05e-03     0s
+   2   7.15757457e-01  3.52329130e-01  6.23e-01 1.07e-02  1.35e-03     0s
+   3   7.55585834e-01  4.90010157e-01  2.43e-01 3.97e-03  5.59e-04     0s
+   4   7.50558217e-01  6.28040215e-01  1.41e-01 2.32e-03  3.39e-04     0s
+   5   8.19284802e-01  7.88248830e-01  8.01e-02 1.53e-03  2.03e-04     0s
+   6   9.68561975e-01  8.90398619e-01  4.92e-02 1.05e-03  1.57e-04     0s
+   7   1.04812343e+00  1.04464637e+00  3.05e-02 3.21e-04  8.18e-05     0s
+   8   1.11000685e+00  1.07705236e+00  1.84e-02 2.41e-04  6.27e-05     0s
+   9   1.14746800e+00  1.14200214e+00  9.81e-03 9.48e-05  3.04e-05     0s
+  10   1.18725753e+00  1.19049441e+00  2.46e-03 8.03e-06  6.87e-06     0s
+  11   1.20145414e+00  1.20078891e+00  5.59e-05 3.20e-07  4.08e-07     0s
+  12   1.20170338e+00  1.20168880e+00  4.46e-07 1.01e-09  6.34e-09     0s
+  13   1.20170323e+00  1.20170323e+00  1.22e-10 4.30e-15  5.74e-14     0s
+
+Barrier solved model in 13 iterations and 0.09 seconds
+Optimal objective 1.20170323e+00
+
+Crossover log...
+
+       0 DPushes remaining with DInf 0.0000000e+00                 0s
+
+    1970 PPushes remaining with PInf 0.0000000e+00                 0s
+       0 PPushes remaining with PInf 0.0000000e+00                 0s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 0.0000000e+00      0s
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    2063    1.2017032e+00   0.000000e+00   0.000000e+00      0s
+    2063    1.2017032e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 2063 iterations and 0.11 seconds
+Optimal objective  1.201703234e+00
