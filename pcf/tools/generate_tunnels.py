@@ -5,6 +5,18 @@
 generate_tunnels.py
 
 Run with python2.7+ (but not python3)
+
+This file takes in a a topology configuration file, tunnel type and output path, and generates physical tunnels and logical sequences.
+
+When tunnel type is 'physical', 3 physical tunnels will be generated for each source-destination pair.
+
+When tunnel type is 'LS', in addtion to 3 physical tunnels, 1 unconditional logical sequence will be generated for each source-destination pair. And the logical sequence will be the shortest path.
+
+When tunnel type is 'CLS', in addtion to 3 physical tunnels, 1 unconditional logical sequence will be generated for each source-destination pair. And 1 conditional logical sequence will be generated for any pair with a direct link(this link will be the condition). All the logical sequences are generated with the help of a restricted PCF flow model.
+
+Example usage: python generate_tunnels.py --topo_config ../_config/b4_config.yaml --tunnel_type CLS --output_path tunnel.tab
+
+
 """
 ####
 #### Imports

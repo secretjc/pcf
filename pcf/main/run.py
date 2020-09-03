@@ -5,6 +5,11 @@
 run.py
 
 Run with python2.7+ (but not python3)
+
+This file takes in a main configuration file and a topology configuration file, and outputs the computed reservation on each tunnel/sequence based on the scheme specified in the main configuration file.
+
+Example usage: python run.py --main_config ../_config/main.yaml --topo_config ../_config/b4_config.yaml
+
 """
 ####
 #### Imports

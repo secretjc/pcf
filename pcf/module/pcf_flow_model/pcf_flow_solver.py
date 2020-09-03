@@ -5,6 +5,9 @@
 pcf_flow_solver.py
 
 Run with python2.7+ (but not python3)
+
+This file contains the interface to call the solver for a restricted version of PCF flow model.
+
 """
 
 ####

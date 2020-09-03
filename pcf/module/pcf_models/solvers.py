@@ -5,6 +5,9 @@
 tunnel.py
 
 Run with python2.7+ (but not python3)
+
+This file contains the interfaces to call the solvers for FFC model and PCF models.
+
 """
 
 ####
