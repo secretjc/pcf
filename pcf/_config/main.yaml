@@ -1,6 +1,6 @@
 main:
     log_level: 'INFO'
-    output: 'output.txt'
+    output: 'output.txt'     # Output path
 #    scheme: 'FFC'
 #    scheme: 'PCFTF'
 #    scheme: 'PCFLS'

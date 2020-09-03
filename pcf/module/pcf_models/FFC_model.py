@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/opt/gurobi/new/lib/python2.7/')
+#sys.path.append('/opt/gurobi/new/lib/python2.7/')
 from gurobipy import *
 import numpy as np
 from collections import defaultdict
@@ -147,7 +147,7 @@ def create_base_model(is_symmetric, data):
   m.update()
   return m
 
-def compute_max_throughput(
+def compute_mlu(
     base_model, num_node_failure, num_link_failure, data, output_file):
   m = base_model.copy()
 
@@ -189,6 +189,7 @@ def compute_max_throughput(
   out_file = open(output_file, 'w')
  
   out_file.write('Physical tunnel reservation:\n')
+  out_file.write('s t k r\n')
   for s, t in sd_pairs:
     for k in tunnels:
       out_file.write('%s %s %s %s\n' % (s, t, k, a[k,s,t].X))

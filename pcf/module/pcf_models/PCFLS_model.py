@@ -255,7 +255,7 @@ def create_base_model(is_symmetric, data):
   m.update()
   return m
 
-def compute_max_throughput(
+def compute_mlu(
     base_model, num_link_failure, data, output_file):
   m = base_model.copy()
 
@@ -317,7 +317,8 @@ def compute_max_throughput(
 
   out_file = open(output_file, 'w')
  
-  out_file.write('Physical tunnel reservation:\n')
+  out_file.write('Physical tunnel reservation:\n') 
+  out_file.write('s t k r\n')
   for i, j in node_pairs:
     tunnel_list = list(atunnels[i,j])
     tunnel_list.sort()
@@ -325,6 +326,7 @@ def compute_max_throughput(
       out_file.write('%s %s %s %s\n' % (i, j, k, a0[tunnel_list[k]].X))
 
   out_file.write('Logical sequence reservation:\n')
+  out_file.write('s t k r\n')
   for i, j in node_pairs:
     tunnel_list = list(btunnels[i,j])
     tunnel_list.sort()

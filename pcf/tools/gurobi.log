@@ -531,3 +531,44 @@ Iter       Primal          Dual         Primal    Dual     Compl     Time
 Barrier solved model in 8 iterations and 0.16 seconds
 Optimal objective 1.20170323e+00
 
+
+Gurobi 8.0.1 (linux64, Python) logging started Thu Sep  3 04:51:15 2020
+
+Changed value of parameter method to 2
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Crossover to 0
+   Prev: -1  Min: -1  Max: 5  Default: -1
+Changed value of parameter Threads to 6
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Optimize a model with 3938 rows, 8019 columns and 22882 nonzeros
+Coefficient statistics:
+  Matrix range     [6e-04, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 1036 rows and 1326 columns
+Presolve time: 0.02s
+Presolved: 2902 rows, 6693 columns, 19514 nonzeros
+Ordering time: 0.11s
+
+Barrier statistics:
+ AA' NZ     : 3.638e+04
+ Factor NZ  : 2.360e+05 (roughly 6 MBytes of memory)
+ Factor Ops : 3.654e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   8.46235249e-01 -4.40000000e+00  3.27e+01 0.00e+00  8.36e-02     0s
+   1   2.59318751e+00 -4.98905698e+00  3.89e+00 4.15e-02  2.95e-02     0s
+   2   4.08869989e+00 -5.99490097e-01  8.74e-01 6.62e-03  5.22e-03     0s
+   3   3.63781956e+00  2.39574725e-01  1.54e-01 2.46e-04  6.07e-04     0s
+   4   1.34805522e+00  4.51099150e-01  2.82e-02 1.41e-05  1.22e-04     0s
+   5   1.22317983e+00  9.54709874e-01  1.61e-02 2.95e-06  3.75e-05     0s
+   6   1.20895526e+00  1.19833367e+00  2.11e-12 1.58e-08  1.33e-06     0s
+   7   1.20171057e+00  1.20169988e+00  8.60e-12 2.22e-16  1.33e-09     0s
+   8   1.20170323e+00  1.20170323e+00  1.76e-11 3.54e-16  6.30e-14     0s
+
+Barrier solved model in 8 iterations and 0.20 seconds
+Optimal objective 1.20170323e+00
+

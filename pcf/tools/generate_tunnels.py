@@ -23,7 +23,7 @@ from itertools import islice
 #import local gurobi path if needed.
 sys.path.append('/package/gurobi/8.0.1/lib/python2.7/')
 sys.path.append('..')
-import module.max_min_u.max_min_u as max_min_u
+import module.pcf_flow_model.pcf_flow_solver as pcf_flow_solver
 
 ####
 #### Authorship information
@@ -235,7 +235,7 @@ def widest_path(e1, e2, weight, n_node):
         now_node = prev[now_node]
     return _to_path_string(path)
 
-def generate_from_r3(capa_file, r3_file, output_file):
+def _generate_from_pcf_flow(capa_file, r3_file, output_file):
     n_node = 0
     fin = open(capa_file)
     edge = {}
@@ -293,16 +293,16 @@ def generate_from_r3(capa_file, r3_file, output_file):
                 count += 1
     out_file.close()
   
-def _compute_r3(topo_config, r3_output):
-  logger = logging.getLogger('compute_mr3')
-  mr3_solver = max_min_u.ModifiedR3Solver(
+def _compute_pcf_flow(topo_config, pcf_flow_output):
+  logger = logging.getLogger('compute_pcf_flow')
+  restricted_pcf_flow_solver = pcf_flow_solver.RestrictedPCFFlowSolver(
       main_config=None,
       topo_config=topo_config,
       solver_config=None)
 
-  solver = mr3_solver
-  throughput, index, solving_time = solver.compute_mlu(output_file=r3_output)
-  logger.info("R3 mlu: %s" % (throughput))
+  solver = restricted_pcf_flow_solver
+  throughput, index, solving_time = solver.compute_mlu(output_file=pcf_flow_output)
+  logger.info("PCF Flow mlu: %s" % (throughput))
 
 def _main(args, configs):
   topo_config = configs['topo_config']
@@ -314,9 +314,9 @@ def _main(args, configs):
   if args.tunnel_type == 'LS':
     generate_tunnel(topo_config['data']['cap_file'], args.output_path, 1)
   if args.tunnel_type == 'CLS':
-    generate_tunnel(topo_config['data']['cap_file'], ars.output_path, 0)
-    _compute_r3(topo_config, "r3_output.txt")
-    generate_from_r3(topo_config['data']['cap_file'], "r3_output.txt", args.output_path)
+    generate_tunnel(topo_config['data']['cap_file'], args.output_path, 0)
+    _compute_pcf_flow(topo_config, "pcf_flow_output.txt")
+    _generate_from_pcf_flow(topo_config['data']['cap_file'], "pcf_flow_output.txt", args.output_path)
   logger.info("Done.")
 
 if __name__ == "__main__":

@@ -1,13 +1,13 @@
 name: 'b4'
 attributes:
-    num_parallel_tunnels: 3  
-    num_link_failures: 1
+    num_parallel_tunnels: 3   # Number of physical tunnels per source-destination pair
+    num_link_failures: 1      # Number of maximum simultaneous link failures 
 traffic_matrix:
-    num_matrices: 1
-    tm_index: 0
+    num_matrices: 1           # Number of traffic matrix in the traffic file
+    tm_index: 0               # Traffic matrix index to be used
 data: 
-    cap_file: '../_data/b4/b4_capa.tab'
-    tm_file: '../_data/b4/b4_traffic.tab'
+    cap_file: '../_data/b4/b4_capa.tab'               # Capacity file path
+    tm_file: '../_data/b4/b4_traffic.tab'             # Traffic matrix file path
     #tunnel_file: '../_data/b4/b4_ffc_tunnel.tab'
     #tunnel_file: '../_data/b4/b4_ls_tunnel.tab'
-    tunnel_file: '../_data/b4/b4_cls_tunnel.tab'
+    tunnel_file: '../_data/b4/b4_cls_tunnel.tab'      # Tunnel file path(including logical sequences)

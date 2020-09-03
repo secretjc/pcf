@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/opt/gurobi/new/lib/python2.7/')
+#sys.path.append('/opt/gurobi/new/lib/python2.7/')
 from gurobipy import *
 import numpy as np
 from collections import defaultdict
@@ -350,7 +350,7 @@ def create_base(cap_file, tm_file, tm_index, unit_cap_file, is_symmetric):
   logging.debug("arcs: %s" % arcs)
   logging.debug("n: %s" % n)
 
-  m = Model('max_min_u_modified_r3')
+  m = Model('Restricted_PCF_flow_model')
 
   # Variable definition
   r = {}

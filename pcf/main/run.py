@@ -19,7 +19,7 @@ import itertools
 #import local gurobi path if needed.
 sys.path.append('/package/gurobi/8.0.1/lib/python2.7/')
 sys.path.append('..')
-import module.pcf_models.tunnel as tunnel
+import module.pcf_models.solvers as solvers
 
 ####
 #### Authorship information
@@ -58,29 +58,29 @@ def _compute(main_config, topo_config):
     main_config['output'] = 'output.txt'
     logger.warning('No output path provided. Use output.txt as default.')
   if scheme == 'FFC':
-    solver = tunnel.TunnelFailureFFCMluSolver(
+    solver = solvers.FFC_Solver(
       main_config=main_config,
       topo_config=topo_config,
       solver_config=None)
   if scheme == 'PCFTF':
-    solver = tunnel.TunnelFailureMluSolver(
+    solver = solvers.PCFTF_Solver(
       main_config=main_config,
       topo_config=topo_config,
       solver_config=None)
   if scheme == 'PCFLS':
-    solver = tunnel.TunnelVirtualABSolver(
+    solver = solvers.PCFLS_Solver(
       main_config=main_config,
       topo_config=topo_config,
       solver_config=None)
   if scheme == 'PCFLS+':
-    solver = tunnel.TunnelVirtualABComSolver(
+    solver = solvers.PCFLS_plus_Solver(
       main_config=main_config,
       topo_config=topo_config,
       solver_config=None)
   if solver is None:   
     logger.error('WRONG scheme!')
     return
-  mlu, solving_time = solver.compute_max_throughput(num_link_failure=int(topo_config['attributes']['num_link_failures']))
+  mlu, solving_time = solver.compute_mlu(num_link_failure=int(topo_config['attributes']['num_link_failures']))
   logger.info('MLU: %s, solving time: %s seconds' % (mlu, solving_time))
   logger.info('Tunnel reservation is saved in %s' % main_config['output'])
 

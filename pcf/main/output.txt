@@ -1,4 +1,5 @@
 Physical tunnel reservation:
+s t k r
 11 10 0 0.061800438985
 11 10 1 0.0
 11 10 2 0.0
@@ -396,6 +397,7 @@ Physical tunnel reservation:
 8 9 1 0.0
 8 9 2 0.0
 Logical sequence reservation:
+s t k r
 11 10 0 0.0
 11 10 1 0.0
 11 1 0 0.007540993817
@@ -567,6 +569,7 @@ Logical sequence reservation:
 8 9 0 0.0
 8 9 1 0.0
 Logical sequence(complement hint) reservation:
+s t k r
 11 10 0 0.0
 11 10 1 0.009976072262
 11 1 0 0.0

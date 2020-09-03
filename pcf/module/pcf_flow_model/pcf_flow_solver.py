@@ -2,7 +2,7 @@
 
 """
 
-max_min_u.py
+pcf_flow_solver.py
 
 Run with python2.7+ (but not python3)
 """
@@ -14,7 +14,7 @@ import sys
 import logging
 
 sys.path.append('../..')
-import module.max_min_u.max_min_u_modified_r3 as modified_r3
+import module.pcf_flow_model.restricted_PCF_flow_model as restricted_PCF_flow_model
 
 ####
 #### Authorship information
@@ -27,7 +27,7 @@ __version__ = "0.0.1"
 __maintainer__ = "Yiyang Chang"
 __email__ = "chang256@purdue.edu"
 
-class ModifiedR3Solver(object):
+class RestrictedPCFFlowSolver(object):
   def __init__(self, _sentinel=None, main_config=None, topo_config=None,
                solver_config=None):
     self.main_config = main_config
@@ -73,10 +73,10 @@ class ModifiedR3Solver(object):
     if self.base_model == None:
       self.logger.debug("No base model. Creating base model")
       self.base_model, self.model_set = \
-          modified_r3.create_base(self.cap_file, self.tm_file, self.tm_index,
+          restricted_PCF_flow_model.create_base(self.cap_file, self.tm_file, self.tm_index,
                                   self.unit_cap_file, is_symmetric)
     self.logger.debug("Add additional constraints and solve")
     fix_edge_list = self._fix_vars(prefix, is_symmetric, sorted_edges)
-    return modified_r3.compute_mlu(self.base_model, self.f,
+    return restricted_PCF_flow_model.compute_mlu(self.base_model, self.f,
         fix_edge_list, self.model_set, is_symmetric, sorted_edges,
         set(search_stack), output_file)
