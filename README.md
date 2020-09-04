@@ -69,7 +69,7 @@ data:
     tunnel_file: '../_data/b4/b4_cls_tunnel.tab'      # Tunnel file path(including logical sequences)
 ```
 
-### capacity file
+### traffic matrix file
 
 In the capacity file, each line(in the format of 'i j c') specifies a direct link with capacity of c from i to j. For example in pcf/_data/b4/b4_capa.tab,
 
