@@ -22,7 +22,7 @@ cd pcf/tools
 python generate_tunnels.py --topo_config ../_config/b4_config.yaml --tunnel_type CLS --output_path tunnel.tab
 ```
 
-Here, you also need to provide a topology configuration file for which you want to generate tunnels. We provide 3 options: 1) physcial: generate 3 physical tunnels per pair; 2) LS: generate physcial tunnels and unconditional logical sequences; 3) CLS: generate physical tunnels and conditional logical sequences. Note that to use this tool, networkx is additionally required. And a local gurobi path also needs to be added if required.
+Here, you also need to provide a topology configuration file for which you want to generate tunnels. We provide 3 options: 1) physical: generate 3 physical tunnels per pair; 2) LS: generate physcial tunnels and unconditional logical sequences; 3) CLS: generate physical tunnels and conditional logical sequences. Note that to use this tool, networkx is additionally required. And a local gurobi path also needs to be added if required.
 
 ## Configuration file and data file
 
@@ -69,4 +69,50 @@ data:
     tunnel_file: '../_data/b4/b4_cls_tunnel.tab'      # Tunnel file path(including logical sequences)
 ```
 
+### capacity file
 
+In the capacity file, each line(in the format of 'i j c') specifies a direct link with capacity of c from i to j. For example in pcf/_data/b4/b4_capa.tab,
+
+```bash
+i j capacity
+0 1 1
+0 2 1
+1 0 1
+1 4 1
+......
+```
+
+the first 4 lines specify 4 links 0->1, 0->2, 1->0, 1->4, all with capacity of 1.
+
+### capacity file
+
+In the traffic matrix file, each line(in the format of 's t h tm') specifies that in the index h, the demand from s to t is tm. For example in pcf/_data/b4/b4_traffic.tab,
+
+```bash
+s t h tm
+0 1 0 0.129265573744
+0 2 0 0.092814149586
+0 3 0 0.063695141693
+......
+```
+
+the first 3 lines specify the demand from 0->1, 0->2, 0->3 in the traffic matrix 0.
+
+### tunnel file
+
+In the tunnel file, each line either specifies a physical tunnel or a logical sequence. Note that all physical tunnels need to be specified before any logical sequence. For example in pcf/_data/b4/b4_cls_tunnel.tab,
+
+```bash
+s t k edges
+7 3 0 7-3
+7 3 1 7-6,6-3
+7 3 2 7-5,5-2,2-3
+......
+7 3 0 7-3 no
+7 3 1 7-5,5-4,4-3 7-3
+......
+```
+
+from 7 to 3, there are 3 physical tunnels [7-3], [7-6,6-3] and [7-5,5-2,2-3], and there are one unconditional logical sequence [7-3] and one conditional logical sequence [7-5,5-4,4-3] which is alive when link [7-3] is alive.
+
+Note that you cannot provide any logical sequence if you are using 'FFC' or 'PCFTF' scheme. And if you are using 'PCFLS+' scheme, for every logical sequence entry, two logical sequences will be generated in the model, one is active when the condition is satisfied and the other is active when the condition is not satisfied. 
