@@ -1,3 +1,13 @@
+"""
+
+restricted_PCF_flow_model.py
+
+Run with python2.7+ (but not python3)
+
+This file reads topology, traffic matrix, tunnel, and implements the a restricted version of PCF flow model in gurobi format.
+
+"""
+
 import sys
 #sys.path.append('/opt/gurobi/new/lib/python2.7/')
 from gurobipy import *

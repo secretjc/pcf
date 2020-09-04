@@ -1,0 +1,13 @@
+name: 'cwix'
+attributes:
+    num_parallel_tunnels: 3  
+    num_link_failures: 1
+traffic_matrix:
+    num_matrices: 1
+    tm_index: 0
+data: 
+    cap_file: '../_data/cwix/cwix_capa.tab'
+    tm_file: '../_data/cwix/cwix_traffic.tab'
+    #tunnel_file: '../_data/cwix/cwix_ffc_tunnel.tab'
+    #tunnel_file: '../_data/cwix/cwix_ls_tunnel.tab'
+    tunnel_file: '../_data/cwix/cwix_cls_tunnel.tab'

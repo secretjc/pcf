@@ -1,3 +1,13 @@
+"""
+
+PCFTF_model.py
+
+Run with python2.7+ (but not python3)
+
+This file reads topology, traffic matrix, tunnel, and implements the PCFTF model in gurobi format.
+
+"""
+
 import sys
 #sys.path.append('/opt/gurobi/new/lib/python2.7/')
 from gurobipy import *

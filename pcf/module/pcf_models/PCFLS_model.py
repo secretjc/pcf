@@ -1,3 +1,13 @@
+"""
+
+PCFLS_model.py
+
+Run with python2.7+ (but not python3)
+
+This file reads topology, traffic matrix, tunnel, and implements the PCFLS model in gurobi format.
+
+"""
+
 import sys
 from gurobipy import *
 import numpy as np
