@@ -174,6 +174,7 @@ def generate_tunnel(capa_file, output_file, flag):
             edge_[count] = (v1,v2)
             count = count + 1
     n_node = n_node + 1
+    fin.close()
 
     demand = {}
     demand_ = {}
@@ -213,6 +214,7 @@ def generate_tunnel(capa_file, output_file, flag):
         for path in b_path:
             s, t, i, path_str = path
             out_file.write("%s %s %s %s no\n" % (s, t, i, path_str))
+    out_file.close()
 
 def widest_path(e1, e2, weight, n_node):
     prev = {}
@@ -290,11 +292,12 @@ def _generate_from_pcf_flow(capa_file, r3_file, output_file):
             w = float(info[5])
             sd[(s,t)][(v1,v2)] = w
     fin.close()
+
     p_tunnel = {}
     for e1, e2 in edge:
         ls1 = widest_path(e1, e2, edge[(e1,e2)], n_node)
         p_tunnel[(e1,e2)] = [(ls1, str(e1) + '-' + str(e2))]
-    out_file = open(output_file, 'w')
+    out_file = open(output_file, 'a')
     for s, t in sd:
         ls = widest_path(s, t, sd[(s,t)], n_node)
         out_file.write("%s %s %s %s no\n" % (s, t, 0, ls))

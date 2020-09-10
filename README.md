@@ -15,7 +15,7 @@ The main configuration file specifies the scheme(FFC, PCFTF, PCFLS, PCFLS+) and 
 
 ## How to generate tunnels:
 
-We provide a tool to generate tunnels and logical sequences in pcf/tools. 
+In general, you can select physical tunnels and logical sequences however you want. We also provide a tool to generate tunnels and logical sequences in pcf/tools as used in PCF paper. 
 
 ```bash
 cd pcf/tools
@@ -100,7 +100,7 @@ the first 3 lines specify the demand from 0->1, 0->2, 0->3 in the traffic matrix
 
 ### tunnel file
 
-In the tunnel file, each line either specifies a physical tunnel or a logical sequence. Note that all physical tunnels need to be specified before any logical sequence. For example in pcf/_data/b4/b4_cls_tunnel.tab,
+In the tunnel file, each line either specifies a physical tunnel or a logical sequence. A physcial tunnel has 4 entries in a line(source, destination, index, list of edges) and a logical sequence has 5 entries(source, destination, index, list of edges, hints). Note that all physical tunnels need to be specified before any logical sequence. For example in pcf/_data/b4/b4_cls_tunnel.tab,
 
 ```bash
 s t k edges
