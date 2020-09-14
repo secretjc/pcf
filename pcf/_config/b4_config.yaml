@@ -3,7 +3,7 @@ attributes:
     num_parallel_tunnels: 3   # Number of physical tunnels per source-destination pair
     num_link_failures: 1      # Number of maximum simultaneous link failures 
 traffic_matrix:
-    num_matrices: 1           # Number of traffic matrix in the traffic file
+    num_matrices: 1           # Number of traffic matrices in the traffic file
     tm_index: 0               # Traffic matrix index to be used
 data: 
     cap_file: '../_data/b4/b4_capa.tab'               # Capacity file path

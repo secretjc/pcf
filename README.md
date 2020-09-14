@@ -59,7 +59,7 @@ attributes:
     num_parallel_tunnels: 3   # Number of physical tunnels per source-destination pair
     num_link_failures: 1      # Number of maximum simultaneous link failures 
 traffic_matrix:
-    num_matrices: 1           # Number of traffic matrix in the traffic file
+    num_matrices: 1           # Number of traffic matrices in the traffic file
     tm_index: 0               # Traffic matrix index to be used
 data: 
     cap_file: '../_data/b4/b4_capa.tab'               # Capacity file path
@@ -68,6 +68,8 @@ data:
     #tunnel_file: '../_data/b4/b4_ls_tunnel.tab'
     tunnel_file: '../_data/b4/b4_cls_tunnel.tab'      # Tunnel file path(including logical sequences)
 ```
+
+Note that even though in traffic matrix file, multiple matrices may be provided, only one traffic matrix will be used for one experiment. "tm_index" specifies that particular traffic matrix. See traffic matrix file for more details. 
 
 ### capacity file
 
@@ -82,11 +84,11 @@ i j capacity
 ......
 ```
 
-the first 4 lines specify 4 links 0->1, 0->2, 1->0, 1->4, all with capacity of 1.
+the first 4 lines specify 4 links 0->1, 0->2, 1->0, 1->4, all with capacity of 1 unit. Note that the unit of capacity is not specified since only the relative values matter. And make sure that the unit of capacity is aligned with the unit of traffic. 
 
 ### traffic matrix file
 
-In the traffic matrix file, each line(in the format of 's t h tm') specifies that in the index h, the demand from s to t is tm. For example in pcf/_data/b4/b4_traffic.tab,
+We allow users to provide 1 or more traffic matrices in the traffic matrix file. Different traffic matrices are distinguished by indexes. Each line(in the format of 's t h tm') specifies that in the index h, the demand from s to t is tm. For example in pcf/_data/b4/b4_traffic.tab,
 
 ```bash
 s t h tm
@@ -96,11 +98,11 @@ s t h tm
 ......
 ```
 
-the first 3 lines specify the demand from 0->1, 0->2, 0->3 in the traffic matrix 0.
-
+the first 3 lines specify the demand from 0->1, 0->2, 0->3 in the traffic matrix 0. Note that, only one traffic matrix will be used for one experiment according to the provided index in the configuration file. 
+ 
 ### tunnel file
 
-In the tunnel file, each line either specifies a physical tunnel or a logical sequence. A physcial tunnel has 4 entries in a line(source, destination, index, list of edges) and a logical sequence has 5 entries(source, destination, index, list of edges, hints). Note that all physical tunnels need to be specified before any logical sequence. For example in pcf/_data/b4/b4_cls_tunnel.tab,
+In the tunnel file, each line either specifies a physical tunnel or a logical sequence. A physical tunnel has 4 entries in a line(source, destination, index, list of edges) and a logical sequence has 5 entries(source, destination, index, list of edges, hints). Note that all physical tunnels need to be specified before any logical sequence. For example in pcf/_data/b4/b4_cls_tunnel.tab,
 
 ```bash
 s t k edges
@@ -113,6 +115,6 @@ s t k edges
 ......
 ```
 
-from 7 to 3, there are 3 physical tunnels [7-3], [7-6,6-3] and [7-5,5-2,2-3], and there are one unconditional logical sequence [7-3] and one conditional logical sequence [7-5,5-4,4-3] which is alive when link [7-3] is alive.
+from 7 to 3, there are 3 physical tunnels [7-3], [7-6,6-3] and [7-5,5-2,2-3], and there is one unconditional logical sequence [7-3] and one conditional logical sequence [7-5,5-4,4-3] which is alive when link [7-3] is alive.
 
 Note that you cannot provide any logical sequence if you are using 'FFC' or 'PCFTF' scheme. And if you are using 'PCFLS+' scheme, for every logical sequence entry, two logical sequences will be generated in the model, one is active when the condition is satisfied and the other is active when the condition is not satisfied. 
