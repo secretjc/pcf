@@ -1,6 +1,6 @@
 # PCF
 
-Required library: gurobi, yaml. Please add local gurobi path in pcf/main/run.py if needed.
+Required library: [gurobi](https://www.gurobi.com/), yaml. Please add local gurobi path in pcf/main/run.py if needed.
 
 ## How to use:
 
@@ -11,7 +11,7 @@ cd pcf/main
 python run.py --main_config ../_config/main.yaml --topo_config ../_config/b4_config.yaml
 ```
 
-The main configuration file specifies the scheme(FFC, PCFTF, PCFLS, PCFLS+) and the output path. The topology configuration file specifies the topology information including the capacity file, the traffic file and the tunnel file. You will also need to provide the number of link failures you want to design for in the topology configuration file. To use FFC or PCFTF, please also provide the number of tunnels between each pair as a parameter. See pcf/_config/main.yaml and pcf/_config/b4_config.yaml for more detailed format.
+The main configuration file specifies the scheme(FFC, PCFTF, PCFLS, PCFCLS) and the output path. The topology configuration file specifies the topology information including the capacity file, the traffic file and the tunnel file. You will also need to provide the number of link failures you want to design for in the topology configuration file. To use FFC or PCFTF, please also provide the number of tunnels between each pair as a parameter. See pcf/_config/main.yaml and pcf/_config/b4_config.yaml for more detailed format.
 
 ## How to generate tunnels:
 
@@ -22,13 +22,13 @@ cd pcf/tools
 python generate_tunnels.py --topo_config ../_config/b4_config.yaml --tunnel_type CLS --output_path tunnel.tab
 ```
 
-Here, you also need to provide a topology configuration file for which you want to generate tunnels. We provide 3 options: 1) physical: generate 3 physical tunnels per pair; 2) LS: generate physcial tunnels and unconditional logical sequences; 3) CLS: generate physical tunnels and conditional logical sequences. Note that to use this tool, networkx is additionally required. And a local gurobi path also needs to be added if required.
+Here, you also need to provide a topology configuration file for which you want to generate tunnels. We provide 3 options: 1) physical: generate 3 physical tunnels per pair; 2) LS: generate physical tunnels and unconditional logical sequences; 3) CLS: generate physical tunnels and conditional logical sequences. Note that to use this tool, [NetworkX](https://networkx.github.io/) package is additionally required. And a local gurobi path also needs to be added if required.
 
 ## Configuration file and data file
 
 ### main configuration
 
-The main configuration file specifies the scheme(FFC, PCFTF, PCFLS, PCFLS+) and the output path. For example in pcf/_config/main.yaml:
+The main configuration file specifies the scheme(FFC, PCFTF, PCFLS, PCFCLS) and the output path. For example in pcf/_config/main.yaml:
 
 ```bash
 main:
@@ -37,7 +37,7 @@ main:
 #    scheme: 'FFC'
 #    scheme: 'PCFTF'
 #    scheme: 'PCFLS'
-    scheme: 'PCFLS+'
+    scheme: 'PCFCLS'
 ```
 
 ### topology configuration
@@ -46,7 +46,7 @@ The topology configuration file specifies
 
 1. Number of physical tunnels between a source-destination pair
 2. Number of maximum simultaneous link failures
-3. Total number of traffic matrix in the traffic matrix file
+3. Total number of traffic matrices in the traffic matrix file
 4. The index of traffic matrix to be used
 5. File paths of capacity file, traffic matrix file, and tunnel file.
 
@@ -88,7 +88,7 @@ the first 4 lines specify 4 links 0->1, 0->2, 1->0, 1->4, all with capacity of 1
 
 ### traffic matrix file
 
-We allow users to provide 1 or more traffic matrices in the traffic matrix file. Different traffic matrices are distinguished by indexes. Each line(in the format of 's t h tm') specifies that in the index h, the demand from s to t is tm. For example in pcf/_data/b4/b4_traffic.tab,
+We allow users to provide 1 or more traffic matrices in the traffic matrix file. Different traffic matrices are distinguished by indexes. Each line(in the format of 's t h tm') specifies that for the traffic matrix with index h, the demand from s to t is tm. For example in pcf/_data/b4/b4_traffic.tab,
 
 ```bash
 s t h tm
@@ -115,6 +115,6 @@ s t k edges
 ......
 ```
 
-from 7 to 3, there are 3 physical tunnels [7-3], [7-6,6-3] and [7-5,5-2,2-3], and there is one unconditional logical sequence [7-3] and one conditional logical sequence [7-5,5-4,4-3] which is alive when link [7-3] is alive.
+from 7 to 3, there are 3 physical tunnels [7-3], [7-6,6-3] and [7-5,5-2,2-3], and there is one unconditional logical sequence [7-3] and one conditional logical sequence [7-5,5-4,4-3] which is active when link [7-3] fails.
 
-Note that you cannot provide any logical sequence if you are using 'FFC' or 'PCFTF' scheme. And if you are using 'PCFLS+' scheme, for every logical sequence entry, two logical sequences will be generated in the model, one is active when the condition is satisfied and the other is active when the condition is not satisfied. 
+Note that you cannot provide any logical sequence if you are using 'FFC' or 'PCFTF' scheme. And if you are using 'PCFLS' scheme, don't provide conditional logical sequences.

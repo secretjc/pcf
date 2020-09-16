@@ -19,7 +19,7 @@ import logging
 import module.pcf_models.FFC_model as FFC_model
 import module.pcf_models.PCFTF_model as PCFTF_model
 import module.pcf_models.PCFLS_model as PCFLS_model
-import module.pcf_models.PCFLS_plus_model as PCFLS_plus_model
+import module.pcf_models.PCFCLS_model as PCFCLS_model
 
 ####
 #### Authorship information
@@ -136,12 +136,12 @@ class PCFLS_Solver(object):
     return PCFLS_model.compute_mlu(
         self.base_model, num_link_failure * 2, self.data, self.output_path)
 
-class PCFLS_plus_Solver(object):
+class PCFCLS_Solver(object):
   def __init__(self, _sentinel=None, main_config=None, topo_config=None,
                solver_config=None):
     self.main_config = main_config
     self.topo_config = topo_config
-    self.logger = logging.getLogger("PCFLS_plus_Solver")
+    self.logger = logging.getLogger("PCFCLS_Solver")
     self.base_model = None
     self._parse_configs()
 
@@ -161,10 +161,10 @@ class PCFLS_plus_Solver(object):
   def compute_mlu(self, _sentinel=None, num_link_failure=None):
     if self.base_model == None:
       self.logger.debug("No base model. Creating base model")
-      self.data = PCFLS_plus_model.prepare_data(
+      self.data = PCFCLS_model.prepare_data(
           self.cap_file, self.tm_file, self.tm_index, self.unit_cap_file,
           self.tunnel_file, self.is_symmetric, self.is_edge_tunnel)
-      self.base_model = PCFLS_plus_model.create_base_model(self.is_symmetric, self.data)
+      self.base_model = PCFCLS_model.create_base_model(self.is_symmetric, self.data)
 
-    return PCFLS_plus_model.compute_mlu(
+    return PCFCLS_model.compute_mlu(
         self.base_model, num_link_failure * 2, self.data, self.output_path)

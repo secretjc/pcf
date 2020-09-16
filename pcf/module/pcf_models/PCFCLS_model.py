@@ -1,10 +1,10 @@
 """
 
-PCFLS_plus_model.py
+PCFCLS_model.py
 
 Run with python2.7+ (but not python3)
 
-This file reads topology, traffic matrix, tunnel, and implements the PCFLS plus model in gurobi format.
+This file reads topology, traffic matrix, tunnel, and implements the PCFCLS model in gurobi format.
 
 """
 
@@ -261,14 +261,20 @@ def create_base_model(is_symmetric, data):
     )
 
   for l in range(bnum_tunnel):
-    m.addConstr(
-      b0[l] >= 0, "cstr_b0[%s]" % (l)
-    )
-
-  for l in range(bnum_tunnel):
-    m.addConstr(
-      c0[l] >= 0, "cstr_c0[%s]" % (l)
-    )
+    if len(btunnel_reason_set[l]) == 0:
+      m.addConstr(
+        b0[l] >= 0, "cstr_b0[%s]" % (l)
+      )
+      m.addConstr(
+        c0[l] == 0, "cstr_c0[%s]" % (l)
+      )
+    else:
+      m.addConstr(
+        b0[l] == 0, "cstr_b0[%s]" % (l)
+      )
+      m.addConstr(
+        c0[l] >= 0, "cstr_c0[%s]" % (l)
+      )
 
   m.update()
   return m
@@ -352,15 +358,10 @@ def compute_mlu(
     tunnel_list = list(btunnels[i,j])
     tunnel_list.sort()
     for k in range(len(tunnel_list)):
-      out_file.write('%s %s %s %s\n' % (i, j, k, b0[tunnel_list[k]].X))
-
-  out_file.write('Logical sequence(complement hint) reservation:\n')
-  out_file.write('s t k r\n')
-  for i, j in node_pairs:
-    tunnel_list = list(btunnels[i,j])
-    tunnel_list.sort()
-    for k in range(len(tunnel_list)):
-      out_file.write('%s %s %s %s\n' % (i, j, k, c0[tunnel_list[k]].X))
+      if len(btunnel_reason_set[tunnel_list[k]]) == 0: 
+        out_file.write('%s %s %s %s\n' % (i, j, k, b0[tunnel_list[k]].X))
+      else:
+        out_file.write('%s %s %s %s\n' % (i, j, k, c0[tunnel_list[k]].X))
 
   if m.Status == GRB.OPTIMAL or m.Status == GRB.SUBOPTIMAL:
     return m.ObjVal, m.Runtime

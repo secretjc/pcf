@@ -4,4 +4,4 @@ main:
 #    scheme: 'FFC'
 #    scheme: 'PCFTF'
 #    scheme: 'PCFLS'
-    scheme: 'PCFLS+'
+    scheme: 'PCFCLS'

@@ -77,8 +77,8 @@ def _compute(main_config, topo_config):
       main_config=main_config,
       topo_config=topo_config,
       solver_config=None)
-  if scheme == 'PCFLS+':
-    solver = solvers.PCFLS_plus_Solver(
+  if scheme == 'PCFCLS':
+    solver = solvers.PCFCLS_Solver(
       main_config=main_config,
       topo_config=topo_config,
       solver_config=None)
